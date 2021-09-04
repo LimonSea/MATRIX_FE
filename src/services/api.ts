@@ -23,7 +23,7 @@ export async function queryQuestions() {
 }
 
 /** 题目修改/创建 POST /updateQuestions */
-export async function updateQuestions(data: API.updateQuestionsParams) {
+export async function updateQuestions(data: API.UpdateQuestionsParams) {
   return request('/updateQuestions', { method: 'POST', data });
 }
 
@@ -33,8 +33,8 @@ export async function uploadfile(file: any) {
 }
 
 /** 组卷 POST /buildExamPaper */
-export async function buildExamPaper(data: API.buildExamPaperParams) {
-  return request('/buildExamPaper');
+export async function buildExamPaper(data: API.BuildExamPaperParams) {
+  return request('/buildExamPaper', { method: 'POST', data });
 }
 
 /** 查询已生成的卷子列表 GET /queryExamPapers */

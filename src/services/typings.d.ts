@@ -6,20 +6,23 @@ declare namespace API {
     account: string,
     password: string
   }
-  type updateQuestionsParams = {
+  type UpdateQuestionsParams = {
     id?: number,
+    date: Date,
     type: number,
     title: string,
-    content: string,
+    content?: string,
     answer: string,
-    img?: string,
+    img?: any,
   }
 
-  type buildExamPaperItemsParams = {
-    type: number,
-    count: number,
+  type BuildExamPaperParams = {
+    date: Date,
+    conditions: {
+      type: number,
+      count: number,
+    }[]
   }
-  type buildExamPaperParams = buildExamPaperItemsParams[]
 
 
   type LoginResult = {

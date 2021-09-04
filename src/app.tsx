@@ -18,19 +18,16 @@ export const initialStateConfig = {
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{
-  name?: string,
+  currentUser?: any,
+  settings: object,
   fetchUserInfo: () => Promise<API.UserInfo | undefined>,
 }> {
   const fetchUserInfo = async () => {
     try {
-      // const res: any = await getCurrentUser();
-      // 存储 token
-      // if (res.success) {
-      //   localStorage.setItem('token', res.data.token);
-      // }
-      // return res.data;
+      const res: any = await getCurrentUser();
+      return {...res.data, avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png', settings: {}};
       // return {name: 'xujing'}
-      return {id: 1, name: 'xujing', token: '111', avatar: ''}
+      // return {id: 1, name: 'xujing', token: '111', avatar: ''}
     } catch (error) {
       history.push(loginPath);
     }
@@ -38,14 +35,16 @@ export async function getInitialState(): Promise<{
   };
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
-    const userInfo = await fetchUserInfo();
+    const currentUser = await fetchUserInfo();
     return {
-      ...userInfo,
+      currentUser,
       fetchUserInfo,
+      settings: {}
     };
   }
   return {
-    fetchUserInfo
+    fetchUserInfo,
+    settings: {},
   };
 }
 
@@ -56,9 +55,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
-      content: initialState?.name,
+      content: initialState?.currentUser?.name,
     },
     footerRender: () => <Footer />,
+    pageTitleRender: false,
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login
@@ -78,7 +78,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
           </Link>,
         ]
       : [],
-    menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
   };

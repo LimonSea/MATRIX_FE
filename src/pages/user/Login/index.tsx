@@ -27,10 +27,10 @@ const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
+    const currentUser = await initialState?.fetchUserInfo?.();
 
-    if (userInfo) {
-      await setInitialState((s: any) => ({ ...s, userInfo }));
+    if (currentUser) {
+      await setInitialState((s: any) => ({ ...s, currentUser }));
     }
   };
 
@@ -41,7 +41,10 @@ const Login: React.FC = () => {
   } = useRequest(login, {
     manual: true,
     onSuccess: async (res) => {
-      if (res.code === '200') {
+      if (res?.token) {
+        // 存储 token
+        localStorage.setItem('token', res.token);
+
         message.success('登录成功');
         await fetchUserInfo();
 
@@ -50,10 +53,9 @@ const Login: React.FC = () => {
         const { redirect } = query as {
           redirect: string;
         };
-        history.push(redirect || '/');
+        history.push(redirect || '/questionList');
       } else {
         setUserLoginState({status: 'error'});
-        message.error(res.msg);
       }
     },
   });
@@ -135,7 +137,7 @@ const Login: React.FC = () => {
             {type === 'account' && (
               <>
                 <ProFormText
-                  name="username"
+                  name="account"
                   fieldProps={{
                     size: 'large',
                     prefix: <UserOutlined className={styles.prefixIcon} />,
