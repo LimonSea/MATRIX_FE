@@ -138,7 +138,7 @@ const ExamList = () => {
       >
         <ProFormDatePicker
           name="date"
-          label="此日期之后的试题不会出现"
+          label="选择此日期之前的试题"
           rules={[
             {
               required: true,
@@ -150,6 +150,12 @@ const ExamList = () => {
           label="试题类型及数量"
           name="conditions"
           trigger="onValuesChange"
+          rules={[
+            {
+              required: true,
+              message: '试题类型及数量为必填项',
+            },
+          ]}
         >
           <EditableProTable<DataSourceType>
             rowKey="id"
@@ -158,6 +164,7 @@ const ExamList = () => {
             recordCreatorProps={{
               newRecordType: 'dataSource',
               position: 'bottom',
+              creatorButtonText: '新增一行',
               record: () => ({
                 id: Date.now(),
               }),
