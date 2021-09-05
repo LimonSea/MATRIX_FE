@@ -60,35 +60,6 @@ const Login: React.FC = () => {
     },
   });
 
-
-  // const handleSubmit = async (values: API.LoginParams) => {
-  //   loginRun(values);
-  //   try {
-  //     // 登录
-  //     const msg = await login({ ...values, type });
-
-  //     if (msg.status === 'ok') {
-  //       const defaultLoginSuccessMessage = '登录成功！';
-  //       message.success(defaultLoginSuccessMessage);
-  //       await fetchUserInfo();
-  //       /** 此方法会跳转到 redirect 参数所在的位置 */
-
-  //       if (!history) return;
-  //       const { query } = history.location;
-  //       const { redirect } = query as {
-  //         redirect: string;
-  //       };
-  //       history.push(redirect || '/');
-  //       return;
-  //     } // 如果失败去设置用户错误信息
-
-  //     setUserLoginState(msg);
-  //   } catch (error) {
-  //     const defaultLoginFailureMessage = '登录失败，请重试！';
-  //     message.error(defaultLoginFailureMessage);
-  //   }
-  // };
-
   const { status } = userLoginState;
   return (
     <div className={styles.container}>
@@ -107,9 +78,6 @@ const Login: React.FC = () => {
 
         <div className={styles.main}>
           <ProForm
-            initialValues={{
-              autoLogin: true,
-            }}
             submitter={{
               searchConfig: {
                 submitText: '登录',
@@ -142,7 +110,7 @@ const Login: React.FC = () => {
                     size: 'large',
                     prefix: <UserOutlined className={styles.prefixIcon} />,
                   }}
-                  placeholder={'用户名: admin or user'}
+                  placeholder={'用户名'}
                   rules={[
                     {
                       required: true,
@@ -156,7 +124,7 @@ const Login: React.FC = () => {
                     size: 'large',
                     prefix: <LockOutlined className={styles.prefixIcon} />,
                   }}
-                  placeholder={'密码: ant.design'}
+                  placeholder={'密码'}
                   rules={[
                     {
                       required: true,

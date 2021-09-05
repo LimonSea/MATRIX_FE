@@ -38,9 +38,6 @@ const QuestionList = () => {
       handleCreateModalVisible(false);
       actionRef.current?.reloadAndRest?.();
       modalFormRef.current?.resetFields();
-      // if (actionRef.current) {
-      //   actionRef.current.reload();
-      // }
     }
   })
 
@@ -63,6 +60,13 @@ const QuestionList = () => {
       dataIndex: 'title',
     },
     {
+      title: '年份',
+      dataIndex: 'date',
+      render: (dom: string) => {
+        return moment(dom).format('YYYY-MM-DD');
+      }
+    },
+    {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
@@ -77,14 +81,6 @@ const QuestionList = () => {
         >
           详情
         </Button>,
-        // <Button
-        //   type='link'
-        //   onClick={() => {
-        //     setDetail(record);
-        //     handleCreateModalVisible(true);
-        //   }}>
-        //   编辑
-        // </Button>,
         <Button type='link'>删除</Button>
       ],
     },
@@ -95,7 +91,7 @@ const QuestionList = () => {
       <ProTable<API.UpdateQuestionsParams>
         headerTitle={'题目列表'}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         search={false}
         pagination={false}
         toolBarRender={() => [
@@ -121,7 +117,6 @@ const QuestionList = () => {
           setDetail(null);
           handleDetailModalVisible(false);
         }}
-        destroyOnClose
       >
         {
           detail && <Descriptions bordered>
@@ -147,7 +142,6 @@ const QuestionList = () => {
           confirmLoading: editRequest.loading
         }}
         onFinish={async (value: API.UpdateQuestionsParams) => {
-          console.log(value)
           const newParams = {
             content: '',
             ...value,
@@ -155,9 +149,6 @@ const QuestionList = () => {
           if (value?.img) {
             newParams.img = value?.img?.[0]?.response?.data;
           }
-          // if (detail?.id) {
-          //   newPrarms.id = detail?.id;
-          // }
           editRequest.run(newParams);
         }}
       >

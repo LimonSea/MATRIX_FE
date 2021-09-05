@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { request } from 'umi';
 const isDev = process.env.NODE_ENV === 'development';
+// export const prefix = '//39.98.176.144/matrix';
 export const prefix = isDev ? '//192.168.125.122:8080/matrix' : '//39.98.176.144/matrix';
 export default function myRequest (url: string, options?: { [key: string]: any }) {
   const headers:any = {};

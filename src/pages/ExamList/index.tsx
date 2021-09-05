@@ -54,10 +54,6 @@ const ExamList = () => {
       },
     },
     {
-      title: '标题',
-      dataIndex: 'title',
-    },
-    {
       title: '创建时间',
       dataIndex: 'createTime',
       render: (_, record: any) => {
@@ -89,6 +85,7 @@ const ExamList = () => {
     {
       title: '数量',
       dataIndex: 'count',
+      valueType: 'digit',
     },
     {
       title: '操作',
@@ -102,7 +99,7 @@ const ExamList = () => {
       <ProTable<API.UpdateQuestionsParams>
         headerTitle={'试卷列表'}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         search={false}
         pagination={false}
         toolBarRender={() => [

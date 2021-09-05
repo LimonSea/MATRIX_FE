@@ -11,9 +11,12 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
+  locale: {
+    default: 'zh-CN',
+    baseNavigator: true,
+  },
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
-    locale: true,
     siderWidth: 208,
     ...defaultSettings,
   },

@@ -25,9 +25,11 @@ export async function getInitialState(): Promise<{
   const fetchUserInfo = async () => {
     try {
       const res: any = await getCurrentUser();
-      return {...res.data, avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png', settings: {}};
-      // return {name: 'xujing'}
-      // return {id: 1, name: 'xujing', token: '111', avatar: ''}
+      return {
+        ...res.data,
+        avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+        settings: {},
+      };
     } catch (error) {
       history.push(loginPath);
     }
@@ -50,7 +52,6 @@ export async function getInitialState(): Promise<{
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
-  console.log('initialState', initialState)
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
@@ -68,15 +69,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     links: isDev
       ? [
-          <Link to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-          <Link to="/~docs">
-            <BookOutlined />
-            <span>业务组件文档</span>
-          </Link>,
-        ]
+        <Link to="/umi/plugin/openapi" target="_blank">
+          <LinkOutlined />
+          <span>OpenAPI 文档</span>
+        </Link>,
+        <Link to="/~docs">
+          <BookOutlined />
+          <span>业务组件文档</span>
+        </Link>,
+      ]
       : [],
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,

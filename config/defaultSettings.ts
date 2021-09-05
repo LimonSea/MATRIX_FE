@@ -4,11 +4,11 @@ const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
 } = {
-  navTheme: "light",
-  layout: "top",
-  contentWidth: "Fixed",
+  navTheme: 'light',
+  layout: 'top',
+  contentWidth: 'Fixed',
   headerHeight: 48,
-  primaryColor: "#2F54EB",
+  primaryColor: '#2F54EB', // 为啥不生效？
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
