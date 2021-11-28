@@ -11,6 +11,10 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
+  // 部署到服务器时要打开，日常调试关掉
+  base: '/matrix/',
+  publicPath: '/matrix/',
+  // --------
   locale: {
     default: 'zh-CN',
     baseNavigator: true,

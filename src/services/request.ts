@@ -2,9 +2,9 @@
 import { request } from 'umi';
 const isDev = process.env.NODE_ENV === 'development';
 // export const prefix = '//39.98.176.144/matrix';
-export const prefix = isDev ? '//192.168.125.122:8080/matrix' : '//39.98.176.144/matrix';
-export default function myRequest (url: string, options?: { [key: string]: any }) {
-  const headers:any = {};
+export const prefix = isDev ? '//192.168.125.123:8080/matrix' : '//39.98.176.144/matrix-server';
+export default function myRequest(url: string, options?: { [key: string]: any }) {
+  const headers: any = {};
   if (localStorage.getItem('token')) {
     headers.token = localStorage.getItem('token');
   }
@@ -13,5 +13,5 @@ export default function myRequest (url: string, options?: { [key: string]: any }
     method: 'GET', // 默认是get, 如果需要修改，在 options 中做覆盖
     headers,
     ...(options || {}),
-  })
+  });
 }
